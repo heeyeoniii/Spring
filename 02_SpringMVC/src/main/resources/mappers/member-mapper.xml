@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="memberSQL">
+
+	<!-- mybatis-config에서 설정해 놓은 별칭 사용 -->
+	<select id="loginMember" parameterType="Member" resultType="Member">
+		SELECT * FROM MEMBER
+		WHERE USERID = #{ userId } AND PASSWORD = #{ password }
+	</select>
+	<!-- #{ 객체의 필드변수 }로 접근한다. -->
+</mapper>

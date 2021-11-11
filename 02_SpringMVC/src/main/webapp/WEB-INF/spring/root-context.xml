@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<!-- Root Context: 웹 서버 전체적인 환경 설정과 관련된 항목을 작성하는 공간 -->	
+	
+	<!-- #1 DBCP 연결 : DataSource 생성 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="oracle.jdbc.OracleDriver"/>
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+		<!-- <property name="url" value="jdbc:oracle:thin:@1.212.197.133:49164:xe"/> -->
+		<property name="username" value="SPRING"/> <!-- SPRING1 / SPRING2 -->
+		<property name="password" value="SPRING"/>
+	</bean>
+	
+	<!-- mybatis 연결하기 -->
+	<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/> <!-- 마이바티스 DB 연결 등록 -->
+		<property name="mapperLocations" value="classpath*:mappers/*.xml" /> 
+		<property name="configLocation" value="classpath:mybatis-config.xml" /> 
+		<!-- classpath* : 여러 개 파일 읽을 시, classpath : 단일 파일 -->		
+	</bean>
+	
+	<!-- mybatis factory에서 SqlSessionTemplate 선언하기 -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactoryBean" />
+	</bean>
+	
+	<!-- 트랜잭션 처리 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>	
+</beans>
