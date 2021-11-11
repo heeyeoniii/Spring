@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- bean 객체 등록 -->
+	<!-- <bean id="객체명" class="객체의 클래스 명"> -->
+	<bean id="lg" class="com.kh.spring.di.model.vo.LgTV" />
+	<bean id="samsung" class="com.kh.spring.di.model.vo.SamsungTV" />
+
+	<bean id="tvmgr" class="com.kh.spring.di.model.vo.TvMgr">
+		<!-- setter 선언 방식 -->
+		<property name="tv" ref="samsung"></property>
+	</bean>
+
+</beans>

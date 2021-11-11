@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+	<!-- xml 방식 -->
+<!--  
+	<bean id="person" class="com.kh.spring.di.anno.vo.Person">		
+	</bean> 
+-->
+	
+	<!-- 어노테이션 방식 -->
+	<!-- @Component로 등록한 Bean들을 특정 패키지(Base-package) 안에서 찾아
+		 모두 xml에 등록하세요 -->
+	<context:component-scan base-package="com.kh.spring.di.anno" />	
+</beans>
